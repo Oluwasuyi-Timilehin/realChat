@@ -4,7 +4,9 @@ import "./App.css";
 function App() {
   return (
     <>
-      <h1 className="underline text-7xl text-emerald-600 font-bold">Hello world</h1>
+      <div className="h-screen flex justify-center items-center bg-gray-100">
+        <h1 className="text-5xl text-zinc-600">Welcome to react and congratulations on using tailwind</h1>
+      </div>
     </>
   );
 }
