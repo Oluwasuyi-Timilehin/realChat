@@ -4,10 +4,16 @@ const Login = () => {
   return (
     <>
       <div className="flex items-center">
-        <div className="hidden md:flex p-3 h-screen bg-blue-900 w-1/2">
+        <div className="hidden lg:flex p-3 h-screen bg-blue-900 w-1/2">
           <h1 className="text-5xl">Login</h1>
         </div>
-        <Signinform />
+        <main className="min-h-screen bg-gray-100 flex items-center justify-center w-full px-5 lg:px-8 lg:w-1/2">
+          <div className="w-full sm:max-w-md sm:mx-auto sm:w-full">
+            <div className="bg-white py-8 px-5 rounded-lg shadow-lg lg:px-10">
+              <Signinform />
+            </div>
+          </div>
+        </main>
       </div>
     </>
   );
