@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import Signinform from "../components/Signinform";
 
 const Login = () => {
@@ -11,6 +12,11 @@ const Login = () => {
           <div className="w-full sm:max-w-md sm:mx-auto sm:w-full">
             <div className="bg-white py-8 px-5 rounded-lg shadow-lg lg:px-10">
               <Signinform />
+              <div className="mt-4">
+                <p className="">
+                  Don't have an account? <Link to="" className="text-blue-500">Sign Up</Link>
+                </p>
+              </div>
             </div>
           </div>
         </main>
