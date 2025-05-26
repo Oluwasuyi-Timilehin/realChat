@@ -11,7 +11,7 @@ const Signinform = () => {
           </label>
           <input
             type="text"
-            className="mt-1 w-full py-1.5 px-3 border border-gray-300 rounded focus:outline-none"
+            className="mt-1 w-full py-2 px-3 border border-gray-300 rounded focus:outline-none"
           />
         </div>
         <div className="">
@@ -23,7 +23,7 @@ const Signinform = () => {
           </label>
           <input
             type="text"
-            className="mt-1 w-full py-1.5 px-3 border border-gray-300 rounded focus:outline-none"
+            className="mt-1 w-full py-2 px-3 border border-gray-300 rounded focus:outline-none"
           />
         </div>
         <button className="bg-emerald-600 w-full text-white rounded py-2 font-medium cursor-pointer">
