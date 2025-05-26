@@ -14,7 +14,7 @@ const Login = () => {
               <Signinform />
               <div className="mt-4">
                 <p className="">
-                  Don't have an account? <Link to="" className="text-blue-500">Sign Up</Link>
+                  Don't have an account? <Link to="" className="text-blue-500">Sign U</Link>
                 </p>
               </div>
             </div>
