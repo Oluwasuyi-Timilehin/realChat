@@ -50,7 +50,7 @@ const Signinform = () => {
             to="/forgotpassword"
             className="underline text-sm text-red-600 cursor-pointer"
           >
-            Forgot password?
+            Forgot password
           </Link>
         </div>
         <button className="bg-emerald-600 px-5 w-full text-white rounded-md shadow-sm text-sm py-3 font-medium cursor-pointer">
