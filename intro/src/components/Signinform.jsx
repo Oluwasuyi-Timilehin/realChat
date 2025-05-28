@@ -48,7 +48,7 @@ const Signinform = () => {
           </div>
           <Link
             to="/forgotpassword"
-            className="underline text-sm text-red-600 cursor-pointe"
+            className="underline text-sm text-red-600 cursor-pointer hover:text-red-500"
           >
             Forgot password?
           </Link>
