@@ -6,7 +6,7 @@ const Login = () => {
     <>
       <div className="flex items-center bg-gray-100">
         <div className="hidden lg:flex p-3 h-screen w-1/2">
-          <h1 className="text-5xl">Login Page</h1>
+          <h1 className="text-5xl"></h1>
         </div>
         <main className="min-h-screen flex items-center justify-center w-full px-5 lg:px-8 lg:w-1/2">
           <div className="w-full sm:max-w-md sm:mx-auto sm:w-full">
