@@ -31,7 +31,7 @@ const Login = () => {
 
             <div className="mt-6 text-center text-sm">
               <p className="text-emerald-700">
-                Don’t have an account?{" "}
+                Don't have an account?{" "}
                 <Link
                   to="/signup"
                   className="font-semibold text-emerald-600 hover:text-emerald-500 transition-colors"

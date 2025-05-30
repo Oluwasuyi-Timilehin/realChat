@@ -1,9 +1,25 @@
 import { LuLock, LuMail } from "react-icons/lu";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signinform = () => {
+
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if(email && password) {
+      navigate("/chatpage");
+    } else {
+      alert("Please fill in all fields.");
+    }
+  }
+
   return (
-    <form className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <label
           htmlFor="email"
@@ -20,7 +36,8 @@ const Signinform = () => {
             id="email"
             autoComplete="email"
             required
-            className="block w-full pl-10 pr-3 py-2 border border-emerald-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"
+            onChange={(e) => setEmail(e.target.value)}
+            className="block w-full pl-10 pr-3 py-2 border border-emerald-200 rounded-lg bg-white focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 transition"
           />
         </div>
       </div>
@@ -41,7 +58,8 @@ const Signinform = () => {
             id="password"
             autoComplete="current-password"
             required
-            className="block w-full pl-10 pr-3 py-2 border border-emerald-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"
+            onChange={(e) => setPassword(e.target.value)}
+            className="block w-full pl-10 pr-3 py-2 border border-emerald-200 rounded-lg bg-white focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 transition"
           />
         </div>
       </div>
@@ -72,7 +90,7 @@ const Signinform = () => {
 
       <button
         type="submit"
-        className="w-full flex justify-center py-2.5 px-4 rounded-lg text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition"
+        className="w-full flex justify-center py-2.5 px-4 rounded-lg text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-emerald-500 transition cursor-pointer"
       >
         Sign in
       </button>
