@@ -1,9 +1,10 @@
+import Chatwindow from "../components/Chatwindow";
 
 
 const ChatPage = () => {
   return (
     <>
-      <div className="">ChatPage</div>
+      <Chatwindow />
     </>
   );
 };
