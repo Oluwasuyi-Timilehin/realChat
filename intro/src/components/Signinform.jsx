@@ -3,61 +3,80 @@ import { Link } from "react-router-dom";
 
 const Signinform = () => {
   return (
-    <>
-      <form action="" className="space-y-6">
-        <div className="">
+    <form className="space-y-6">
+      <div>
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium text-emerald-800 mb-1"
+        >
+          Email address
+        </label>
+        <div className="relative rounded-lg shadow-sm">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <LuMail className="h-5 w-5 text-emerald-400" />
+          </div>
+          <input
+            type="email"
+            id="email"
+            autoComplete="email"
+            required
+            className="block w-full pl-10 pr-3 py-2 border border-emerald-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label
+          htmlFor="password"
+          className="block text-sm font-medium text-emerald-800 mb-1"
+        >
+          Password
+        </label>
+        <div className="relative rounded-lg shadow-sm">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <LuLock className="h-5 w-5 text-emerald-400" />
+          </div>
+          <input
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            required
+            className="block w-full pl-10 pr-3 py-2 border border-emerald-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"
+          />
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <div className="flex items-center">
+          <input
+            id="remember-me"
+            name="remember-me"
+            type="checkbox"
+            className="text-emerald-600 focus:ring-emerald-500 border-emerald-300 rounded"
+          />
           <label
-            htmlFor="email"
-            className="block font-medium text-sm text-gray-700"
+            htmlFor="remember-me"
+            className="ml-2 block text-sm text-emerald-800"
           >
-            Email address
+            Remember me
           </label>
-          <div className="mt-1 relative rounded shadow-sm">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <LuMail className="text-gray-400 h-5 w-5" />
-            </div>
-            <input
-              type="text"
-              className="mt-1 w-full py-2 pl-10 pr-5 border border-gray-300 rounded focus:outline-none"
-            />
-          </div>
         </div>
-        <div className="">
-          <label
-            htmlFor="password"
-            className="block font-medium text-sm text-gray-700"
-          >
-            Password
-          </label>
-          <div className="mt-1 relative rounded shadow-sm">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <LuLock className="text-gray-400 h-5 w-5" />
-            </div>
-            <input
-              type="text"
-              className="mt-1 w-full py-2 pl-10 pr-5 border border-gray-300 rounded focus:outline-none"
-            />
-          </div>
-        </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <input type="checkbox" className="cursor-pointer" />
-            <label htmlFor="checkbox" className="text-sm text-gray-700">
-              Remember Me
-            </label>
-          </div>
-          <Link
-            to="/forgotpassword"
-            className="underline text-sm text-red-600 cursor-pointer hover:text-red-500"
-          >
-            Forgot password?
-          </Link>
-        </div>
-        <button className="bg-emerald-600 px-5 w-full text-white rounded-md shadow-sm text-sm py-3 font-medium cursor-pointer">
-          Log In
-        </button>
-      </form>
-    </>
+
+        <Link
+          to="/forgot-password"
+          className="text-sm font-medium text-emerald-600 hover:text-emerald-500 transition-colors"
+        >
+          Forgot password?
+        </Link>
+      </div>
+
+      <button
+        type="submit"
+        className="w-full flex justify-center py-2.5 px-4 rounded-lg text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition"
+      >
+        Sign in
+      </button>
+    </form>
   );
 };
 
