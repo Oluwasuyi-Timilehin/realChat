@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-const Usechat = (chatId) => {
+const Usechat = () => {
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
 
@@ -15,48 +15,31 @@ const Usechat = (chatId) => {
     setIsTyping(true);
 
     try {
-      // Replace with your actual OpenAI API key
-      const OPENAI_KEY = "sk-your-openai-key-here"; // TEMPORARY - use environment variables in production
-
-      const response = await fetch(
-        "https://api.openai.com/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${OPENAI_KEY}`,
-          },
-          body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: userInput }],
-            temperature: 0.7,
-          }),
-        }
-      );
+      const response = await fetch("http://localhost:11434/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "llama2", // or "mistral", "gemma", etc.
+          messages: [{ role: "user", content: userInput }],
+          stream: false,
+        }),
+      });
 
       const data = await response.json();
       const botMessage = {
         id: Date.now() + 1,
-        text: data.choices[0].message.content,
+        text: data.message.content,
         sender: "bot",
         timestamp: new Date().toISOString(),
       };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
-      console.error("API Error:", error);
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: Date.now() + 1,
-          text: "Sorry, I couldn't process your request.",
-          sender: "bot",
-          timestamp: new Date().toISOString(),
-        },
-      ]);
+      // Error handling
     } finally {
       setIsTyping(false);
     }
   };
+
   return { messages, sendMessage, isTyping };
 };
 

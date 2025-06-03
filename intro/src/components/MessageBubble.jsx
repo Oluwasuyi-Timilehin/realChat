@@ -1,6 +1,8 @@
 const MessageBubble = ({ text, sender, timestamp }) => {
   const isUser = sender === "user";
 
+  const displayText = typeof text === "string" ? text : JSON.stringify(text);
+
   return (
     <>
       <div className={`flex mb-4 ${isUser ? "justify-end" : "justify-start"}`}>
@@ -11,13 +13,13 @@ const MessageBubble = ({ text, sender, timestamp }) => {
               : "bg-white border border-gray-200"
           }`}
         >
-          <p className="mb-1">{text}</p>
+          <p className="mb-1 whitespace-pre-wrap">{displayText}</p>
           <p
             className={`text-xs ${isUser ? "text-blue-200" : "text-gray-500"}`}
           >
             {new Date(timestamp).toLocaleTimeString()}
           </p>
-          {/* Tailwind triangle tip */}
+          {/* Triangle tip */}
           <div
             className={`absolute top-0 w-3 h-3 ${
               isUser
