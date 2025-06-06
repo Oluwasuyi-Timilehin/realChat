@@ -10,7 +10,7 @@ const Chatwindow = () => {
   const [chats, setChats] = useState([
     {
       id: "chat-1",
-      title: "New Conversation",
+      title: "New Chat",
       preview: "Start chatting...",
       date: new Date(),
       unread: false,

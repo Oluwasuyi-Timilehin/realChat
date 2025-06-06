@@ -1,4 +1,5 @@
 import { FiMessageSquare, FiTrash2, FiPlus, FiUser } from "react-icons/fi";
+import { LuMoon } from "react-icons/lu";
 import { format } from "date-fns";
 
 const Sidewindow = ({
@@ -9,9 +10,12 @@ const Sidewindow = ({
   onDeleteChat,
 }) => {
   return (
-    <div className="w-72 bg-white border-r flex flex-col h-full">
+    <div className="w-72 bg-white border-r border-zinc-400 flex flex-col h-full">
       <div className="p-4 space-y-4">
-        <p className="font-semibold text-zinc-700 text-xl">Chats</p>
+        <div className="flex justify-between items-center">
+          <p className="font-semibold text-zinc-700 text-xl">Chats</p>
+          <LuMoon className="cursor-pointer" />
+        </div>
         <button
           onClick={onNewChat}
           className="w-full flex items-center justify-center gap-2 bg-emerald-600 text-white py-2 px-4 rounded-lg hover:bg-emerald-700 transition cursor-pointer"
@@ -71,7 +75,7 @@ const Sidewindow = ({
         </div>
       </div>
 
-      <div className="p-4 border-t border-zinc-400">
+      <div className="p-3 border-t border-zinc-400">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
             <FiUser className="text-emerald-500" />
