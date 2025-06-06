@@ -1,4 +1,4 @@
-import { FiMessageSquare, FiTrash2, FiPlus } from "react-icons/fi";
+import { FiMessageSquare, FiTrash2, FiPlus, FiUser } from "react-icons/fi";
 import { format } from "date-fns";
 
 const Sidewindow = ({
@@ -9,11 +9,12 @@ const Sidewindow = ({
   onDeleteChat,
 }) => {
   return (
-    <div className="w-64 bg-white border-r flex flex-col h-full">
-      <div className="p-4 border-b">
+    <div className="w-72 bg-white border-r flex flex-col h-full">
+      <div className="p-4 space-y-4">
+        <p className="font-semibold text-zinc-700 text-xl">Chats</p>
         <button
           onClick={onNewChat}
-          className="w-full flex items-center justify-center gap-2 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition"
+          className="w-full flex items-center justify-center gap-2 bg-emerald-600 text-white py-2 px-4 rounded-lg hover:bg-emerald-700 transition cursor-pointer"
         >
           <FiPlus /> New Chat
         </button>
@@ -29,13 +30,17 @@ const Sidewindow = ({
               <div
                 key={chat.id}
                 className={`relative group rounded-lg ${
-                  activeChat === chat.id ? "bg-blue-50" : "hover:bg-gray-50"
+                  activeChat === chat.id
+                    ? "bg-emerald-50"
+                    : "hover:bg-emerald-50"
                 }`}
               >
                 <button
                   onClick={() => onSelectChat(chat.id)}
                   className={`w-full text-left p-3 pr-8 ${
-                    activeChat === chat.id ? "text-blue-600" : "text-gray-700"
+                    activeChat === chat.id
+                      ? "text-emerald-600"
+                      : "text-emerald-700"
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -54,7 +59,8 @@ const Sidewindow = ({
                 {chats.length > 1 && (
                   <button
                     onClick={() => onDeleteChat(chat.id)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-zinc-400 hover:text-red-500 transition opacity-0 
+                    group-hover:opacity-100"
                   >
                     <FiTrash2 size={14} />
                   </button>
@@ -65,14 +71,14 @@ const Sidewindow = ({
         </div>
       </div>
 
-      <div className="p-4 border-t">
+      <div className="p-4 border-t border-zinc-400">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-            <span className="text-blue-500">U</span>
+          <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
+            <FiUser className="text-emerald-500" />
           </div>
           <div>
             <p className="font-medium">User</p>
-            <p className="text-xs text-gray-500">Free Plan</p>
+            <p className="text-xs text-zinc-500">Free Plan</p>
           </div>
         </div>
       </div>
