@@ -1,35 +1,53 @@
-const MessageBubble = ({ text, sender, timestamp }) => {
-  const isUser = sender === "user";
+import { FiUser } from "react-icons/fi";
+import { LuBot } from "react-icons/lu";
+import { format } from "date-fns";
 
-  const displayText = typeof text === "string" ? text : JSON.stringify(text);
-
+const MessageBubble = ({ message, isUser }) => {
   return (
-    <>
-      <div className={`flex mb-4 ${isUser ? "justify-end" : "justify-start"}`}>
+    <div className={`flex ${isUser ? "justify-end" : "justify-start"} gap-2`}>
+      {!isUser && (
+        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mt-1">
+          <LuBot className="text-blue-500" />
+        </div>
+      )}
+
+      <div
+        className={`max-w-[80%] md:max-w-[70%] flex flex-col ${
+          isUser ? "items-end" : "items-start"
+        }`}
+      >
         <div
-          className={`max-w-xs md:max-w-md rounded-lg p-4 relative ${
+          className={`rounded-2xl p-4 ${
             isUser
-              ? "bg-blue-600 text-white"
-              : "bg-white border border-gray-200"
+              ? "bg-blue-500 text-white rounded-tr-none"
+              : "bg-white text-gray-800 rounded-tl-none shadow-sm"
           }`}
         >
-          <p className="mb-1 whitespace-pre-wrap">{displayText}</p>
-          <p
-            className={`text-xs ${isUser ? "text-blue-200" : "text-gray-500"}`}
-          >
-            {new Date(timestamp).toLocaleTimeString()}
-          </p>
-          {/* Triangle tip */}
-          <div
-            className={`absolute top-0 w-3 h-3 ${
-              isUser
-                ? "right-0 -mr-1 bg-blue-600 rotate-45"
-                : "left-0 -ml-1 bg-white border-l border-t border-gray-200 -rotate-45"
-            }`}
-          ></div>
+          <div className="whitespace-pre-wrap">
+            {typeof message.text === "string" ? (
+              message.text
+            ) : (
+              <pre className="text-xs">
+                {JSON.stringify(message.text, null, 2)}
+              </pre>
+            )}
+          </div>
+        </div>
+        <div
+          className={`text-xs mt-1 text-gray-400 ${
+            isUser ? "text-right" : "text-left"
+          }`}
+        >
+          {format(new Date(message.timestamp), "h:mm a")}
         </div>
       </div>
-    </>
+
+      {isUser && (
+        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center mt-1">
+          <FiUser className="text-white" />
+        </div>
+      )}
+    </div>
   );
 };
 

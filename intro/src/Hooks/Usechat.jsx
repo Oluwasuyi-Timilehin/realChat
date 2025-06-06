@@ -1,8 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const Usechat = () => {
+const UseChat = (activeChat) => {
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [chatHistory, setChatHistory] = useState({});
+
+  // Load messages when active chat changes
+  useEffect(() => {
+    if (chatHistory[activeChat]) {
+      setMessages(chatHistory[activeChat]);
+    } else {
+      setMessages([]);
+    }
+  }, [activeChat, chatHistory]);
+
+  const clearMessages = () => {
+    setMessages([]);
+  };
 
   const sendMessage = async (userInput) => {
     const userMessage = {
@@ -11,69 +25,59 @@ const Usechat = () => {
       sender: "user",
       timestamp: new Date().toISOString(),
     };
-    setMessages((prev) => [...prev, userMessage]);
+
+    // Update messages immediately (optimistic update)
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
+
+    // Update chat history
+    setChatHistory((prev) => ({
+      ...prev,
+      [activeChat]: newMessages,
+    }));
+
     setIsTyping(true);
 
     try {
-      // Configuration - use environment variables in production
-      const HF_API_KEY =
-        import.meta.env.VITE_DEEPSEEK_API_KEY ||
-        "";
+      // In a real app, you would call your API here
+      // This is a mock response for demonstration
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      const response = await fetch(
-        `https://api-inference.huggingface.co/models/deepseek-ai/DeepSeek-V3`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${HF_API_KEY}`,
-          },
-          body: JSON.stringify({
-            inputs: userInput,
-            parameters: {
-              max_new_tokens: 200,
-              temperature: 0.7,
-            },
-          }),
-        }
-      );
-
-      // Handle response errors
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error?.message || "API request failed");
-      }
-
-      const data = await response.json();
-      const botResponse =
-        data.choices[0]?.message?.content || "No response generated";
+      const botResponse = `This is a simulated response to: "${userInput}"`;
 
       const botMessage = {
         id: Date.now() + 1,
-        text: botResponse.trim(),
+        text: botResponse,
         sender: "bot",
         timestamp: new Date().toISOString(),
       };
-      setMessages((prev) => [...prev, botMessage]);
-    } catch (error) {
-      setMessages((prev) => [
+
+      const updatedMessages = [...newMessages, botMessage];
+      setMessages(updatedMessages);
+      setChatHistory((prev) => ({
         ...prev,
-        {
-          id: Date.now() + 1,
-          text: `Error: ${error.message.replace(
-            "Failed to fetch",
-            "Connection error"
-          )}`,
-          sender: "bot",
-          timestamp: new Date().toISOString(),
-        },
-      ]);
+        [activeChat]: updatedMessages,
+      }));
+    } catch (error) {
+      const errorMessage = {
+        id: Date.now() + 1,
+        text: `Error: ${error.message}`,
+        sender: "bot",
+        timestamp: new Date().toISOString(),
+      };
+
+      const errorMessages = [...newMessages, errorMessage];
+      setMessages(errorMessages);
+      setChatHistory((prev) => ({
+        ...prev,
+        [activeChat]: errorMessages,
+      }));
     } finally {
       setIsTyping(false);
     }
   };
 
-  return { messages, sendMessage, isTyping };
+  return { messages, sendMessage, isTyping, clearMessages };
 };
 
-export default Usechat;
+export default UseChat;
