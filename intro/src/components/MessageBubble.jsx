@@ -6,8 +6,8 @@ const MessageBubble = ({ message, isUser }) => {
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"} gap-2`}>
       {!isUser && (
-        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mt-1">
-          <LuBot className="text-blue-500" />
+        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center mt-1">
+          <LuBot className="text-emerald-500" />
         </div>
       )}
 
@@ -19,8 +19,8 @@ const MessageBubble = ({ message, isUser }) => {
         <div
           className={`rounded-2xl p-4 ${
             isUser
-              ? "bg-blue-500 text-white rounded-tr-none"
-              : "bg-white text-gray-800 rounded-tl-none shadow-sm"
+              ? "bg-emerald-500 text-white rounded-tr-none"
+              : "bg-white text-zinc-800 rounded-tl-none shadow-sm"
           }`}
         >
           <div className="whitespace-pre-wrap">
@@ -34,7 +34,7 @@ const MessageBubble = ({ message, isUser }) => {
           </div>
         </div>
         <div
-          className={`text-xs mt-1 text-gray-400 ${
+          className={`text-xs mt-1 text-zinc-400 ${
             isUser ? "text-right" : "text-left"
           }`}
         >
@@ -43,7 +43,7 @@ const MessageBubble = ({ message, isUser }) => {
       </div>
 
       {isUser && (
-        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center mt-1">
+        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center mt-1">
           <FiUser className="text-white" />
         </div>
       )}
