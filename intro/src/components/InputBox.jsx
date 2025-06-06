@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { FiSend, FiPaperclip, FiMic } from "react-icons/fi";
 
-const InputBox = ({ onSend, isTyping, className = "" }) => {
+const InputBox = ({ onSend, isTyping, className = "", theme }) => {
   const [input, setInput] = useState("");
   const [isComposing, setIsComposing] = useState(false);
   const textareaRef = useRef(null);
@@ -30,14 +30,28 @@ const InputBox = ({ onSend, isTyping, className = "" }) => {
   }, [input]);
 
   return (
-    <div className="px-2 py-3 bg-white flex flex-col gap-2 relative">
+    <div
+      className={`px-2 py-3 flex flex-col gap-2 relative ${
+        theme === "dark" ? "bg-zinc-800" : "bg-white"
+      } ${className}`}
+    >
       {isTyping && (
-        <div className="text-xs text-zinc-500 mb-2 px-2">
+        <div
+          className={`text-xs mb-2 px-2 ${
+            theme === "dark" ? "text-zinc-400" : "text-zinc-500"
+          }`}
+        >
           Assistant is typing...
         </div>
       )}
       <div className="flex items-center justify-center gap-2">
-        <button className="p-2 cursor-pointer text-zinc-500 hover:text-zinc-700 rounded-full hover:bg-zinc-100">
+        <button
+          className={`p-2 cursor-pointer rounded-full ${
+            theme === "dark"
+              ? "text-zinc-300 hover:bg-zinc-700"
+              : "text-zinc-500 hover:bg-zinc-100"
+          }`}
+        >
           <FiPaperclip />
         </button>
         <div className="flex-1 relative">
@@ -49,7 +63,11 @@ const InputBox = ({ onSend, isTyping, className = "" }) => {
             onCompositionStart={() => setIsComposing(true)}
             onCompositionEnd={() => setIsComposing(false)}
             placeholder="Type a message..."
-            className="w-full p-2 border border-zinc-400 rounded-md focus:outline-none focus:border-emerald-500 transition-all text-zinc-700"
+            className={`w-full p-2 border rounded-md focus:outline-none focus:border-emerald-500 transition-all ${
+              theme === "dark"
+                ? "bg-zinc-700 border-zinc-600 text-zinc-100 placeholder-zinc-400"
+                : "border-zinc-400 text-zinc-700"
+            }`}
             rows={1}
             disabled={isTyping}
           />
@@ -60,12 +78,20 @@ const InputBox = ({ onSend, isTyping, className = "" }) => {
           className={`p-2 rounded-full ${
             input.trim()
               ? "bg-emerald-500 text-white hover:bg-emerald-600"
-              : "text-zinc-400 "
+              : theme === "dark"
+              ? "text-zinc-600"
+              : "text-zinc-400"
           } transition`}
         >
           <FiSend />
         </button>
-        <button className="p-2 cursor-pointer text-zinc-500 hover:text-zinc-700 rounded-full hover:bg-zinc-100">
+        <button
+          className={`p-2 cursor-pointer rounded-full ${
+            theme === "dark"
+              ? "text-zinc-300 hover:bg-zinc-700"
+              : "text-zinc-500 hover:bg-zinc-100"
+          }`}
+        >
           <FiMic />
         </button>
       </div>

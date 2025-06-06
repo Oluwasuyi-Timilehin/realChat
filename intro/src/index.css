@@ -3,3 +3,26 @@
 * {
     font-family: "Montserrat", sans-serif ;
 }
+
+/* Smooth transitions for dark mode */
+html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Custom scrollbar for dark mode */
+  .dark ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .dark ::-webkit-scrollbar-track {
+    background: #1e1e1e;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #777;
+  }
