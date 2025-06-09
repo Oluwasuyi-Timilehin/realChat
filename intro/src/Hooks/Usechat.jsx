@@ -26,11 +26,8 @@ const UseChat = (activeChat) => {
       timestamp: new Date().toISOString(),
     };
 
-    // Update messages immediately (optimistic update)
     const newMessages = [...messages, userMessage];
     setMessages(newMessages);
-
-    // Update chat history
     setChatHistory((prev) => ({
       ...prev,
       [activeChat]: newMessages,
@@ -39,11 +36,39 @@ const UseChat = (activeChat) => {
     setIsTyping(true);
 
     try {
-      // In a real app, you would call your API here
-      // This is a mock response for demonstration
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Format conversation history for Llama 2
+      const conversationHistory = [
+        ...messages.map((m) => ({
+          role: m.sender === "user" ? "user" : "assistant",
+          content: m.text,
+        })),
+        { role: "user", content: userInput },
+      ];
 
-      const botResponse = `This is a simulated response to: "${userInput}"`;
+      const response = await fetch(
+        "https://api.deepinfra.com/v1/openai/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_DEEPINFRA_API_KEY}`,
+          },
+          body: JSON.stringify({
+            model: "meta-llama/Llama-2-70b-chat-hf",
+            messages: conversationHistory,
+            temperature: 0.7,
+            max_tokens: 500,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || "Failed to get response");
+      }
+
+      const data = await response.json();
+      const botResponse = data.choices[0].message.content;
 
       const botMessage = {
         id: Date.now() + 1,
@@ -59,6 +84,7 @@ const UseChat = (activeChat) => {
         [activeChat]: updatedMessages,
       }));
     } catch (error) {
+      console.error("API Error:", error);
       const errorMessage = {
         id: Date.now() + 1,
         text: `Error: ${error.message}`,
