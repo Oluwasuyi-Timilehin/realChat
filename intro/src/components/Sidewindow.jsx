@@ -30,7 +30,7 @@ const Sidewindow = ({
           </p>
           <button
             onClick={toggleTheme}
-            className="p-1 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-400"
+            className="p-1 rounded-full cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-400"
           >
             {theme === "dark" ? (
               <LuSun className="text-yellow-300" />
@@ -122,7 +122,7 @@ const Sidewindow = ({
         }`}
       >
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900 cursor-pointer flex items-center justify-center">
             <FiUser className="text-emerald-500 dark:text-emerald-400" />
           </div>
           <div>
