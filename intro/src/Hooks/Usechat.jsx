@@ -36,7 +36,6 @@ const UseChat = (activeChat) => {
     setIsTyping(true);
 
     try {
-      // Format conversation history for Llama 2
       const conversationHistory = [
         ...messages.map((m) => ({
           role: m.sender === "user" ? "user" : "assistant",

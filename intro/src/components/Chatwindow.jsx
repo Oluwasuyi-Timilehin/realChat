@@ -3,7 +3,7 @@ import MessageBubble from "./MessageBubble";
 import InputBox from "./InputBox";
 import Sidewindow from "./Sidewindow";
 import UseChat from "../Hooks/Usechat";
-import { FiPlus, FiMessageSquare, FiUser, FiChevronLeft } from "react-icons/fi";
+import { FiUser, FiChevronLeft } from "react-icons/fi";
 import { LuBot } from "react-icons/lu";
 import UseTheme from "../Hooks/useTheme";
 import UseMediaQuery from "../Hooks/useMediaQuery";
@@ -21,13 +21,12 @@ const Chatwindow = () => {
   ]);
 
   const isMobile = UseMediaQuery("(max-width: 1024px)");
-  const [mobileView, setMobileView] = useState("sidebar"); // 'sidebar' or 'chat'
+  const [mobileView, setMobileView] = useState("sidebar");
   const { theme, toggleTheme } = UseTheme();
 
   const { messages, sendMessage, isTyping, clearMessages } =
     UseChat(activeChat);
 
-  // Set initial view based on screen size
   useEffect(() => {
     setMobileView(isMobile ? "sidebar" : "both");
   }, [isMobile]);
@@ -126,26 +125,37 @@ const Chatwindow = () => {
                 ))
               )}
               {isTyping && (
-                <div className="flex justify-start">
+                <div
+                  className={`flex items-start gap-2 mb-4 ${
+                    theme === "dark" ? "text-zinc-300" : "text-zinc-600"
+                  }`}
+                >
                   <div
-                    className={`rounded-lg p-4 max-w-xs ${
-                      theme === "dark" ? "bg-zinc-800" : "bg-white"
-                    }`}
+                    className={`w-8 h-8 rounded-full ${
+                      theme === "dark" ? "bg-zinc-700" : "bg-zinc-200"
+                    } flex items-center justify-center`}
                   >
-                    <div className="flex space-x-2">
+                    <LuBot className="text-emerald-500" />
+                  </div>
+                  <div
+                    className={`rounded-lg p-3 ${
+                      theme === "dark" ? "bg-zinc-800" : "bg-white"
+                    } shadow`}
+                  >
+                    <div className="flex space-x-1">
                       <div
                         className={`w-2 h-2 rounded-full ${
-                          theme === "dark" ? "bg-zinc-500" : "bg-zinc-300"
+                          theme === "dark" ? "bg-zinc-500" : "bg-zinc-400"
                         } animate-bounce`}
                       ></div>
                       <div
                         className={`w-2 h-2 rounded-full ${
-                          theme === "dark" ? "bg-zinc-500" : "bg-zinc-300"
+                          theme === "dark" ? "bg-zinc-500" : "bg-zinc-400"
                         } animate-bounce delay-75`}
                       ></div>
                       <div
                         className={`w-2 h-2 rounded-full ${
-                          theme === "dark" ? "bg-zinc-500" : "bg-zinc-300"
+                          theme === "dark" ? "bg-zinc-500" : "bg-zinc-400"
                         } animate-bounce delay-150`}
                       ></div>
                     </div>

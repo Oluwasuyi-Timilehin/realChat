@@ -4,7 +4,7 @@ const UseTheme = () => {
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
-    // Check for saved user preference or use system preference
+    // Check for saved user preference
     const savedTheme =
       localStorage.getItem("theme") ||
       (window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -12,7 +12,7 @@ const UseTheme = () => {
         : "light");
     setTheme(savedTheme);
     document.documentElement.classList.toggle("dark", savedTheme === "dark");
-  }, []); // <-- This was missing the closing parenthesis
+  }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
