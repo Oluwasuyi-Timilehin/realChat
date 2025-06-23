@@ -30,7 +30,7 @@ const Sidewindow = ({
           </p>
           <button
             onClick={toggleTheme}
-            className="p-1 rounded-full cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-400"
+            className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-400"
           >
             {theme === "dark" ? (
               <LuSun className="text-yellow-300" />
