@@ -44,7 +44,7 @@ const Signinform = () => {
 
       <div>
         <label
-          htmlFor="passwo"
+          htmlFor="password"
           className="block text-sm font-medium text-emerald-800 mb-1"
         >
           Password
